@@ -5,14 +5,6 @@ flask_cas.__init__
 import flask
 from flask import current_app
 
-# Find the stack on which we want to store the database connection.
-# Starting with Flask 0.9, the _app_ctx_stack is the correct one,
-# before that we need to use the _request_ctx_stack.
-try:
-    from flask import _app_ctx_stack as stack
-except ImportError:
-    from flask import _request_ctx_stack as stack
-
 from . import routing
 
 from functools import wraps
@@ -65,7 +57,7 @@ class CAS(object):
             app.teardown_request(self.teardown)
 
     def teardown(self, exception):
-        ctx = stack.top
+        pass
     
     @property
     def app(self):
